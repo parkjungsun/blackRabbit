@@ -3,6 +3,7 @@ package com.pjsun.blackrabbit.rest.common.controller;
 import com.pjsun.blackrabbit.rest.common.code.HttpErrorCode;
 import com.pjsun.blackrabbit.rest.common.dto.MessageResponse;
 import com.pjsun.blackrabbit.rest.common.dto.SampleRequestDto;
+import com.pjsun.blackrabbit.rest.common.exception.CommonException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,17 +26,10 @@ import java.util.HashMap;
 @RestController
 @RequestMapping("/common")
 public class CommonController {
-    /**
-    * Http API Test
-    * @ param:
-    * @ return:
-    * @ exception:
-    * */
-    @PostMapping("/test")
+    @PostMapping("/test") /* Build API TEST 용도 */
     public ResponseEntity<MessageResponse> test (
             @RequestBody @Valid SampleRequestDto data) throws Exception {
         log.info("service api test");
-
         if(data.getDivision().equals(200L)) return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.send(HttpErrorCode.OK.getMessage()));
         if(data.getDivision().equals(201L)) return ResponseEntity.status(HttpStatus.CREATED).body(MessageResponse.send(HttpErrorCode.CREATED.getMessage()));
         if(data.getDivision().equals(202L)) return ResponseEntity.status(HttpStatus.ACCEPTED).body(MessageResponse.send(HttpErrorCode.ACCEPTED.getMessage()));
@@ -47,7 +41,6 @@ public class CommonController {
         if(data.getDivision().equals(500L)) return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(MessageResponse.send(HttpErrorCode.INTERNAL_SERVER_ERROR.getMessage()));
         if(data.getDivision().equals(503L)) return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(MessageResponse.send(HttpErrorCode.SERVICE_UNAVAILABLE.getMessage()));
         if(data.getDivision().equals(504L)) return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(MessageResponse.send(HttpErrorCode.BAD_GATEWAY.getMessage()));
-
-        throw new Exception("API TEST");
+        throw new CommonException("API TEST");
     }
 }
