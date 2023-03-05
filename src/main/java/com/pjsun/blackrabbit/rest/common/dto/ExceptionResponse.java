@@ -3,7 +3,6 @@ package com.pjsun.blackrabbit.rest.common.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Getter @Setter

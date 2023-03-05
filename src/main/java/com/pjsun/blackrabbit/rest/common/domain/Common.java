@@ -15,9 +15,11 @@ public class Common extends BaseEntity{
     @Id @GeneratedValue
     @Column(name = "common_id")
     private Long id;
-    @Column(name = "nm", length = 50, nullable = false)
-    private String nm;
-    @Column(name="cnt",length = 4096)
+    @Column(name = "grp_cd", length = 50, nullable = false)
+    private String grpCd;
+    @Column(name="cd",length = 50)
+    private String cd;
+    @Column(name="cnt",length = 400)
     private String cnt;
     @Convert(converter = BooleanToYNConverter.class)
     @Column(name="use_yn", length = 1)
